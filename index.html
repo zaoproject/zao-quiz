@@ -136,7 +136,7 @@ function checkAnswer(choice, btn){
 function checkFinal(input){
   if(input.trim()===quizzes.final.answerText){
     container.innerHTML=`
-      <h1 style="font-size:2em;">おめでとう！全問クリア！</h1>
+      <h1 style="font-size:2em;">おめでとう！\n全問クリア！</h1>
       <p class="message">答えは「${quizzes.final.answerText}」でした。</p>
       <p><a href="https://forms.gle/mfHe6rbxjTjCdYtG6" target="_blank" style="color:yellow; font-weight:bold;">▶ アンケートにご協力ください</a></p>
     `;
@@ -161,4 +161,5 @@ hintBtn.onclick = ()=>{
 </script>
 </body>
 </html>
+
 
