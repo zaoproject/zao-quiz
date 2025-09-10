@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>蔵王ジャンプ台クイズ</title>
 <style>
 body {
@@ -13,90 +13,35 @@ body {
   font-family: 'Yu Gothic', 'Segoe UI', sans-serif;
   color: #fff;
 }
-
-/* クイズコンテナ */
 .quiz-container {
   max-width: 95%;
   width: 600px;
   margin: 30px auto;
-  background: rgba(0,128,0,0.7);
-  padding: 25px;
+  background: rgba(0,128,0,0.6);
+  padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.8);
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
   text-align: center;
-  box-sizing: border-box;
 }
-
-/* 見出し */
-h1 { font-size: 1.6em; word-break: break-word; }
-
-/* 選択肢 */
-.options {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  margin-top: 25px;
-}
-
-/* ボタン共通 */
+h1 { font-size: 1.5em; }
+.options { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
 .option-btn, .answer-btn {
-  padding: 15px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.3em;
-  cursor: pointer;
-  background-color: #ffecb3;
-  color: #000;
-  transition: background 0.3s;
-  word-break: break-word;
+  padding: 12px; border: none; border-radius: 10px;
+  font-size: 1.2em; cursor: pointer; background-color: #ffecb3; color: #000; transition: background 0.3s;
 }
-
-/* ホバー時 */
 .option-btn:hover:enabled, .answer-btn:hover { background-color: #ffd54f; }
-
-/* 正解・不正解 */
 .option-btn.correct { background-color: #4caf50 !important; color: #fff; }
 .option-btn.wrong { background-color: #9e9e9e !important; color: #fff; }
-
-/* 答え入力 */
-.answer-input { width: 100%; padding: 12px; font-size: 1.1em; margin: 20px 0; border-radius: 10px; border: 1px solid #ccc; box-sizing: border-box; }
-
-/* ヒントボタン */
+.answer-input { width: 100%; padding: 10px; font-size: 1em; margin: 15px 0; border-radius: 8px; border: 1px solid #ccc; }
 #hintBtn {
-  margin-top: 20px;
-  padding: 15px 25px;
-  font-size: 1.3em;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  background-color: #81d4fa;
-  color: #000;
-  transition: background 0.3s;
+  margin-top: 25px; padding: 12px 20px; font-size: 1.2em; border: none;
+  border-radius: 10px; cursor: pointer; background-color: #81d4fa; color: #000; transition: background 0.3s;
 }
-
-/* ヒント表示 */
 #hint {
-  margin-top: 15px;
-  padding: 12px;
-  background-color: rgba(200,230,200,0.85);
-  border-radius: 12px;
-  font-size: 1.2em;
-  display: none;
-  color: #000;
-  word-break: break-word;
+  margin-top: 15px; padding: 10px; background-color: rgba(200,230,200,0.8);
+  border-radius: 10px; font-size: 1.2em; display: none; color: #000;
 }
-
-/* メッセージ */
-.message, .keyword { margin-top: 20px; font-weight: bold; font-size: 1.6em; word-break: break-word; }
-
-/* メディアクエリ: 小さいスマホ対応 */
-@media (max-width: 400px) {
-  .quiz-container { padding: 15px; }
-  h1 { font-size: 1.3em; }
-  .option-btn, .answer-btn { font-size: 1.1em; padding: 12px; }
-  #hintBtn { font-size: 1.1em; padding: 12px 18px; }
-  .answer-input { font-size: 1em; padding: 10px; }
-}
+.message, .keyword { margin-top: 15px; font-weight: bold; font-size: 1.6em; }
 </style>
 </head>
 <body>
@@ -107,7 +52,9 @@ h1 { font-size: 1.6em; word-break: break-word; }
   <p id="hint"></p>
 </div>
 
+<!-- confetti.js の読み込み -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <script>
 const quizzes = {
   1: { question: "蔵王ジャンプ台が建設されたのはいつでしょうか?", options:["1976年","1978年","1980年","1982年"], answer:1, hint:"受付で配ったパンフレットを見よう!", keyword:"ツ" },
@@ -115,7 +62,7 @@ const quizzes = {
   3: { question: "蔵王ジャンプ台で髙梨沙羅選手が出した最大の飛距離はどれでしょう?", options:["101.0m","103.5m","106.0m","108.5m"], answer:2, hint:"ジャンプ台に設置されている看板を見てみよう!", keyword:"ェ" },
   4: { question: "選手が着地する場所(ランディングバーン)の最大斜度は何度でしょうか?", options:["35度","36.5度","38度","39.5度"], answer:1, hint:"受付で配ったパンフレットを見よう!", keyword:"シ" },
   5: { question: "8月に開催されたサマージャンプ大会で第2位となった内藤智文選手の勤務先はどちらでしょうか?", options:["蔵王温泉宿泊施設","蔵王温泉スキー場","山形県職員","山形市職員"], answer:3, hint:"受付テントに掲示してある新聞のコピーを見てみよう!", keyword:"ン" },
-  final: { question: "5つのキーワードをはめ込んで答えを導きだそう!\nアリオンテック蔵王〇〇〇〇〇", answerText:"シャンツェ", hint:"キーワードを並べ替えて考えよう!" }
+  final: { question: "5つのキーワードをはめ込んで答えを導きだそう!\n蔵王ジャンプ台の別名はアリオンテック蔵王〇〇〇〇〇", answerText:"シャンツェ", hint:"キーワードを並べ替えて考えよう!" }
 };
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -175,10 +122,7 @@ function checkAnswer(choice, btn){
   } else {
     locked = true;
     btn.classList.add("wrong");
-    const msg = document.createElement("p"); 
-    msg.textContent="不正解！5秒後に再挑戦できます"; 
-    msg.style.fontSize="1.5em"; 
-    msg.style.color="yellow";
+    const msg = document.createElement("p"); msg.textContent="不正解！5秒後に再挑戦できます"; msg.style.fontSize="1.5em"; msg.style.color="yellow";
     container.appendChild(msg);
     allBtns.forEach(b=>b.disabled=true);
     setTimeout(()=>{
@@ -192,7 +136,7 @@ function checkAnswer(choice, btn){
 function checkFinal(input){
   if(input.trim()===quizzes.final.answerText){
     container.innerHTML=`
-      <h1 style="font-size:2em;">おめでとう！ 全問クリア！</h1>
+      <h1 style="font-size:2em;">おめでとう！全問クリア！</h1>
       <p class="message">答えは「${quizzes.final.answerText}」でした。</p>
       <p><a href="https://forms.gle/mfHe6rbxjTjCdYtG6" target="_blank" style="color:yellow; font-weight:bold;">▶ アンケートにご協力ください</a></p>
     `;
